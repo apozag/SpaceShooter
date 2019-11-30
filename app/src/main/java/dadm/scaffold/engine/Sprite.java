@@ -28,7 +28,7 @@ public abstract class Sprite extends ScreenGameObject {
 
         this.bitmap = ((BitmapDrawable) spriteDrawable).getBitmap();
 
-        radius = Math.max(height, width)/2;
+        radius = Math.max(height, width)/3;
     }
 
     @Override

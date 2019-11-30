@@ -22,7 +22,7 @@ public class  SpaceShipPlayer extends Sprite {
 
 
     public SpaceShipPlayer(GameEngine gameEngine){
-        super(gameEngine, R.drawable.ship);
+        super(gameEngine, R.drawable.spaceship);
         speedFactor = pixelFactor * 100d / 1000d; // We want to move at 100px per second on a 400px tall screen
         maxX = gameEngine.width/2 - width;
         maxY = gameEngine.height - height;
@@ -100,6 +100,7 @@ public class  SpaceShipPlayer extends Sprite {
             //gameEngine.stopGame();
             Asteroid a = (Asteroid) otherObject;
             a.removeObject(gameEngine);
+            gameEngine.stopGame();
         }
     }
 }
