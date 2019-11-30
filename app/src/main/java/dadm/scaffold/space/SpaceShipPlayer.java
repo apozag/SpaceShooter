@@ -100,7 +100,11 @@ public class  SpaceShipPlayer extends Sprite {
             //gameEngine.stopGame();
             Asteroid a = (Asteroid) otherObject;
             a.removeObject(gameEngine);
-            gameEngine.stopGame();
+        } else if (otherObject instanceof Enemy) {
+            gameEngine.removeGameObject(this);
+            //gameEngine.stopGame();
+            Enemy e = (Enemy) otherObject;
+            e.removeObject(gameEngine);
         }
     }
 }

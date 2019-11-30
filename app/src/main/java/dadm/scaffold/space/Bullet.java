@@ -51,6 +51,12 @@ public class Bullet extends Sprite {
             Asteroid a = (Asteroid) otherObject;
             a.removeObject(gameEngine);
             // Add some score
+        }else if (otherObject instanceof Enemy) {
+            // Remove both from the game (and return them to their pools)
+            removeObject(gameEngine);
+            Enemy e = (Enemy) otherObject;
+            e.removeObject(gameEngine);
+            // Add some score
         }
     }
 }
