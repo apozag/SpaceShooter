@@ -64,6 +64,6 @@ public class Asteroid extends Sprite {
 
     @Override
     public void onCollision(GameEngine gameEngine, ScreenGameObject otherObject) {
-
+        removeObject(gameEngine);
     }
 }

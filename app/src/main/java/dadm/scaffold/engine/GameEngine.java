@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import dadm.scaffold.BaseFragment;
+import dadm.scaffold.counter.GameFragment;
 import dadm.scaffold.input.InputController;
 import dadm.scaffold.space.SpaceShipPlayer;
 
@@ -27,9 +29,10 @@ public class   GameEngine {
     public int height;
     public double pixelFactor;
 
-    private Activity mainActivity;
+    public Activity mainActivity;
+    public GameFragment fragment;
 
-    public GameEngine(Activity activity, GameView gameView) {
+    public GameEngine(Activity activity, GameView gameView, GameFragment fragment) {
         mainActivity = activity;
 
         theGameView = gameView;
@@ -40,6 +43,8 @@ public class   GameEngine {
                 - theGameView.getPaddingTop() - theGameView.getPaddingTop();
 
         this.pixelFactor = this.height / 400d;
+
+        this.fragment = fragment;
 
     }
 

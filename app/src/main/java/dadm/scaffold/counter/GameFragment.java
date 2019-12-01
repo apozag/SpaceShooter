@@ -15,6 +15,7 @@ import dadm.scaffold.ScaffoldActivity;
 import dadm.scaffold.engine.FramesPerSecondCounter;
 import dadm.scaffold.engine.GameEngine;
 import dadm.scaffold.engine.GameView;
+import dadm.scaffold.engine.LifesCounter;
 import dadm.scaffold.input.JoystickInputController;
 import dadm.scaffold.space.GameController;
 import dadm.scaffold.space.SpaceShipPlayer;
@@ -23,6 +24,8 @@ import dadm.scaffold.space.SpaceShipPlayer;
 public class GameFragment extends BaseFragment implements View.OnClickListener {
     private GameEngine theGameEngine;
     private SpaceShipPlayer spaceShipPlayer;
+
+    private GameFragment instance = this;
 
     public GameFragment() {
     }
@@ -46,14 +49,14 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
                 //se elimina el listener en cuanto es llamado
                 observer.removeOnGlobalLayoutListener(this);
                 GameView gameView = (GameView) getView().findViewById(R.id.gameView);
-                theGameEngine = new GameEngine(getActivity(), gameView);
+                theGameEngine = new GameEngine(getActivity(), gameView, instance );
                 theGameEngine.setTheInputController(new JoystickInputController(getView()));
                 spaceShipPlayer = new SpaceShipPlayer(theGameEngine);
                 theGameEngine.addGameObject(spaceShipPlayer);
                 theGameEngine.setSpaceShipPlayer(spaceShipPlayer);
                 theGameEngine.addGameObject(new FramesPerSecondCounter(theGameEngine));
+                theGameEngine.addGameObject(new LifesCounter(theGameEngine, spaceShipPlayer));
                 theGameEngine.addGameObject(new GameController(theGameEngine));
-
                 theGameEngine.startGame();
             }
         });
@@ -89,6 +92,10 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
             return true;
         }
         return false;
+    }
+
+    public void gameOver(){
+        ((ScaffoldActivity)getActivity()).gameOver();
     }
 
     private void pauseGameAndShowPauseDialog() {

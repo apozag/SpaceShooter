@@ -18,6 +18,9 @@ public class JoystickInputController extends InputController {
 
         double pixelFactor = view.getHeight() / 400d;
         maxDistance = 50*pixelFactor;
+
+        isFiring = true;
+
     }
 
     private class JoystickTouchListener implements View.OnTouchListener {
@@ -58,10 +61,7 @@ public class JoystickInputController extends InputController {
         public boolean onTouch(View v, MotionEvent event) {
             int action = event.getActionMasked();
             if (action == MotionEvent.ACTION_DOWN) {
-                isFiring = true;
-            }
-            else if (action == MotionEvent.ACTION_UP) {
-                isFiring = false;
+                tripleShoot = true;
             }
             return true;
         }

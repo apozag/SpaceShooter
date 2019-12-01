@@ -41,7 +41,7 @@ public class Enemy extends Sprite {
 
     @Override
     public void onCollision(GameEngine gameEngine, ScreenGameObject otherObject) {
-
+        removeObject(gameEngine);
     }
 
     @Override
