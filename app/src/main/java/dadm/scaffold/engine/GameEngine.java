@@ -8,10 +8,11 @@ import java.util.List;
 import java.util.Random;
 
 import dadm.scaffold.input.InputController;
+import dadm.scaffold.space.SpaceShipPlayer;
 
 public class   GameEngine {
 
-
+    private SpaceShipPlayer spaceShipPlayer;
     private List<GameObject> gameObjects = new ArrayList<GameObject>();
     private List<GameObject> objectsToAdd = new ArrayList<GameObject>();
     private List<GameObject> objectsToRemove = new ArrayList<GameObject>();
@@ -22,7 +23,6 @@ public class   GameEngine {
     private final GameView theGameView;
 
     public Random random = new Random();
-
     public int width;
     public int height;
     public double pixelFactor;
@@ -41,7 +41,14 @@ public class   GameEngine {
 
         this.pixelFactor = this.height / 400d;
 
+    }
 
+    public SpaceShipPlayer getSpaceShipPlayer() {
+        return spaceShipPlayer;
+    }
+
+    public void setSpaceShipPlayer(SpaceShipPlayer spaceShipPlayer) {
+        this.spaceShipPlayer = spaceShipPlayer;
     }
 
     public void setTheInputController(InputController inputController) {

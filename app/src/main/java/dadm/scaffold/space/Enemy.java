@@ -12,6 +12,8 @@ public class Enemy extends Sprite {
     private double speed;
     private double speedX;
     private double speedY;
+    private double TargetX;
+    private double TargetY;
 
 
     public Enemy(GameController gameController, GameEngine gameEngine) {
@@ -49,6 +51,17 @@ public class Enemy extends Sprite {
 
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
+        TargetX = gameEngine.getSpaceShipPlayer().getPosX();
+        TargetY = gameEngine.getSpaceShipPlayer().getPosY();
+
+        double distanceX = TargetX - positionX;
+        double distanceY = TargetY - positionY;
+        double normalizedX = distanceX / (distanceX + distanceY);
+        double normalizedY = distanceY / (distanceX + distanceY);
+
+        speedX = -speed * normalizedX;
+        speedY = -speed * normalizedY;
+
         positionX += speedX * elapsedMillis;
         positionY += speedY * elapsedMillis;
 

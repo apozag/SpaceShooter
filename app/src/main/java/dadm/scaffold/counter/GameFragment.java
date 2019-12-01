@@ -22,6 +22,7 @@ import dadm.scaffold.space.SpaceShipPlayer;
 
 public class GameFragment extends BaseFragment implements View.OnClickListener {
     private GameEngine theGameEngine;
+    private SpaceShipPlayer spaceShipPlayer;
 
     public GameFragment() {
     }
@@ -47,9 +48,12 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
                 GameView gameView = (GameView) getView().findViewById(R.id.gameView);
                 theGameEngine = new GameEngine(getActivity(), gameView);
                 theGameEngine.setTheInputController(new JoystickInputController(getView()));
-                theGameEngine.addGameObject(new SpaceShipPlayer(theGameEngine));
+                spaceShipPlayer = new SpaceShipPlayer(theGameEngine);
+                theGameEngine.addGameObject(spaceShipPlayer);
+                theGameEngine.setSpaceShipPlayer(spaceShipPlayer);
                 theGameEngine.addGameObject(new FramesPerSecondCounter(theGameEngine));
                 theGameEngine.addGameObject(new GameController(theGameEngine));
+
                 theGameEngine.startGame();
             }
         });

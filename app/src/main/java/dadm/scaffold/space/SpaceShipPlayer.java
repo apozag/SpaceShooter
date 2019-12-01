@@ -16,6 +16,8 @@ public class  SpaceShipPlayer extends Sprite {
     List<Bullet> bullets = new ArrayList<Bullet>();
     private long timeSinceLastFire;
 
+    private double posX;
+    private double posY;
     private int maxX;
     private int maxY;
     private double speedFactor;
@@ -28,6 +30,14 @@ public class  SpaceShipPlayer extends Sprite {
         maxY = gameEngine.height - height;
 
         initBulletPool(gameEngine);
+    }
+
+    public double getPosX() {
+        return posX;
+    }
+
+    public double getPosY() {
+        return posY;
     }
 
     private void initBulletPool(GameEngine gameEngine) {
@@ -52,6 +62,8 @@ public class  SpaceShipPlayer extends Sprite {
     public void startGame() {
         positionX = maxX / 2;
         positionY = maxY / 2;
+        this.posX = positionX;
+        this.posY = positionY;
     }
 
     @Override
@@ -76,6 +88,8 @@ public class  SpaceShipPlayer extends Sprite {
         if (positionY > maxY) {
             positionY = maxY;
         }
+        this.posX = positionX;
+        this.posY = positionY;
     }
 
     private void checkFiring(long elapsedMillis, GameEngine gameEngine) {

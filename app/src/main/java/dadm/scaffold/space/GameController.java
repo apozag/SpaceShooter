@@ -13,10 +13,12 @@ public class GameController extends GameObject {
     private static final int TIME_BETWEEN_ASTEROIDS = 500;
     private static final int TIME_BETWEEN_ENEMIES = 1000;
     private long currentMillis;
+
     private List<Asteroid> asteroidPool = new ArrayList<Asteroid>();
     private List<Enemy> enemyPool = new ArrayList<Enemy>();
     private int asteroidsSpawned;
-    public int enemiesSpawned;
+    private int enemiesSpawned;
+
 
     public GameController(GameEngine gameEngine) {
         // We initialize the pool of items now
@@ -54,8 +56,6 @@ public class GameController extends GameObject {
             e.init(gameEngine);
             gameEngine.addGameObject(e);
             enemiesSpawned++;
-        } else {
-            System.out.println(enemyPool.size());
         }
     }
 
