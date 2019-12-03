@@ -10,10 +10,10 @@
 
 
     <ImageView
-        android:layout_gravity="center"
         android:id="@+id/image"
-        android:layout_width="202dp"
-        android:layout_height="190dp"
+        android:layout_width="109dp"
+        android:layout_height="127dp"
+        android:layout_gravity="center"
         android:src="@drawable/spaceship_1" />
 
     <Button

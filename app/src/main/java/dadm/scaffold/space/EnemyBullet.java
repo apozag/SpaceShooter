@@ -34,7 +34,8 @@ public class EnemyBullet extends Sprite {
 
 
 
-    public void init(Enemy parentPlayer, double initPositionX, double initPositionY, float angle) {
+    public void init(Enemy parentPlayer, GameEngine gameEngine, double initPositionX, double initPositionY, float angle) {
+        gameEngine.eBulletSound.play();
         positionX = initPositionX - width*4;
         positionY = initPositionY + height/2;
         speedX = speedFactor * Math.cos(angle);

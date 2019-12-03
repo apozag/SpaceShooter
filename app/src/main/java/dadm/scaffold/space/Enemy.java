@@ -72,7 +72,7 @@ public class Enemy extends Sprite {
         if(time >= shootTime){
             time = 0.0;
             EnemyBullet bullet = new EnemyBullet(gameEngine);
-            bullet.init(this, positionX, positionY, 0);
+            bullet.init(this, gameEngine, positionX, positionY, 0);
             gameEngine.addGameObject(bullet);
         }
 

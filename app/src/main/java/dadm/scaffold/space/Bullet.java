@@ -13,6 +13,7 @@ public class Bullet extends Sprite {
     private double speedY;
 
     private SpaceShipPlayer parent;
+    private GameEngine gameEngine;
 
     public Bullet(GameEngine gameEngine){
         super(gameEngine, R.drawable.laser);
@@ -36,7 +37,8 @@ public class Bullet extends Sprite {
 
 
 
-    public void init(SpaceShipPlayer parentPlayer, double initPositionX, double initPositionY, float angle) {
+    public void init(SpaceShipPlayer parentPlayer, GameEngine gameEngine, double initPositionX, double initPositionY, float angle) {
+        gameEngine.bulletSound.play();
         positionX = initPositionX + width/2;
         positionY = initPositionY +  height/2;
         speedX = speedFactor * Math.cos(angle);

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import dadm.scaffold.BaseFragment;
+import dadm.scaffold.R;
 import dadm.scaffold.counter.GameFragment;
 import dadm.scaffold.input.InputController;
 import dadm.scaffold.space.SpaceShipPlayer;
@@ -32,6 +32,9 @@ public class   GameEngine {
 
     public Activity mainActivity;
     public GameFragment fragment;
+    public Audio bulletSound;
+    public Audio eBulletSound;
+    public Audio crashSound;
 
     public GameEngine(Activity activity, GameView gameView, GameFragment fragment) {
         mainActivity = activity;
@@ -64,7 +67,9 @@ public class   GameEngine {
     public void startGame() {
         // Stop a game if it is running
         stopGame();
-
+        bulletSound = new Audio(getContext(), R.raw.bullet);
+        eBulletSound = new Audio(getContext(), R.raw.enemybullet);
+        crashSound = new Audio(getContext(), R.raw.crash);
         // Setup the game objects
         int numGameObjects = gameObjects.size();
         for (int i = 0; i < numGameObjects; i++) {
@@ -81,6 +86,7 @@ public class   GameEngine {
     }
 
     public void stopGame() {
+
         if (theUpdateThread != null) {
             theUpdateThread.stopGame();
         }

@@ -104,7 +104,7 @@ public class  SpaceShipPlayer extends Sprite {
             Bullet[] bullet = {getBullet(), getBullet(), getBullet(), getBullet(), getBullet(), getBullet()};
             for(Bullet b : bullet){
                 if(b != null) {
-                    b.init(this, positionX + width / 2, positionY, (float) (gameEngine.random.nextDouble() * Math.PI / 6d - Math.PI / 12d));
+                    b.init(this, gameEngine, positionX + width / 2, positionY, (float) (gameEngine.random.nextDouble() * Math.PI / 6d - Math.PI / 12d));
                     gameEngine.addGameObject(b);
                 }
             }
@@ -116,7 +116,7 @@ public class  SpaceShipPlayer extends Sprite {
             if (bullet == null) {
                 return;
             }
-            bullet.init(this, positionX + width/2, positionY, 0);
+            bullet.init(this, gameEngine, positionX + width/2, positionY, 0);
             gameEngine.addGameObject(bullet);
             timeSinceLastFire = 0;
         }
@@ -129,17 +129,20 @@ public class  SpaceShipPlayer extends Sprite {
     public void onCollision(GameEngine gameEngine, ScreenGameObject otherObject) {
         if (otherObject instanceof Asteroid) {
             //gameEngine.stopGame();
+            gameEngine.crashSound.play();
             Asteroid a = (Asteroid) otherObject;
             a.removeObject(gameEngine);
             lifes--;
         } else if (otherObject instanceof Enemy) {
             //gameEngine.stopGame();
+            gameEngine.crashSound.play();
             Enemy e = (Enemy) otherObject;
             e.removeObject(gameEngine);
             lifes--;
         }
         else if (otherObject instanceof EnemyBullet) {
             //gameEngine.stopGame();
+            gameEngine.crashSound.play();
             EnemyBullet e = (EnemyBullet) otherObject;
             e.removeObject(gameEngine);
             lifes--;
