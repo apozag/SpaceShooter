@@ -37,8 +37,8 @@ public class Bullet extends Sprite {
 
 
     public void init(SpaceShipPlayer parentPlayer, double initPositionX, double initPositionY, float angle) {
-        positionX = initPositionX - width/2;
-        positionY = initPositionY - height/2;
+        positionX = initPositionX + width/2;
+        positionY = initPositionY +  height/2;
         speedX = speedFactor * Math.cos(angle);
         speedY = speedFactor * Math.sin(angle);
         parent = parentPlayer;
