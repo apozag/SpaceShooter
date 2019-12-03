@@ -12,7 +12,6 @@ public class EnemyBullet extends Sprite {
     private double speedX;
     private double speedY;
 
-    private Enemy parent;
 
     public EnemyBullet(GameEngine gameEngine){
         super(gameEngine, R.drawable.laser_enemy);
@@ -40,7 +39,6 @@ public class EnemyBullet extends Sprite {
         positionY = initPositionY - height/2;
         speedX = speedFactor * Math.cos(angle);
         speedY = speedFactor * Math.sin(angle);
-        parent = parentPlayer;
         rotation = angle;
     }
 
@@ -51,18 +49,6 @@ public class EnemyBullet extends Sprite {
 
     @Override
     public void onCollision(GameEngine gameEngine, ScreenGameObject otherObject) {
-        if (otherObject instanceof Asteroid) {
-            // Remove both from the game (and return them to their pools)
-            removeObject(gameEngine);
-            Asteroid a = (Asteroid) otherObject;
-            a.removeObject(gameEngine);
-            // Add some score
-        }else if (otherObject instanceof Enemy) {
-            // Remove both from the game (and return them to their pools)
-            removeObject(gameEngine);
-            Enemy e = (Enemy) otherObject;
-            e.removeObject(gameEngine);
-            // Add some score
-        }
+
     }
 }

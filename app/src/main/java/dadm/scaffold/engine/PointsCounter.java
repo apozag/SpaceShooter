@@ -38,7 +38,7 @@ public class PointsCounter extends GameObject {
 
     @Override
     public void onDraw(Canvas canvas) {
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.WHITE);
         canvas.drawText("points: " + player.getPoints(), textWidth / 2, (int) (canvas.getHeight() / 3), paint);
         draws++;
     }

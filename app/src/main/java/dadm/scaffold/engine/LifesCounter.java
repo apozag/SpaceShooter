@@ -39,7 +39,7 @@ public class LifesCounter extends GameObject{
 
     @Override
     public void onDraw(Canvas canvas) {
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.WHITE);
         canvas.drawText("Lifes: " + player.getLifes(), textWidth / 2, (int) (canvas.getHeight() / 2), paint);
         draws++;
     }

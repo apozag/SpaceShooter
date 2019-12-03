@@ -11,6 +11,7 @@ import dadm.scaffold.BaseFragment;
 import dadm.scaffold.counter.GameFragment;
 import dadm.scaffold.input.InputController;
 import dadm.scaffold.space.SpaceShipPlayer;
+import dadm.scaffold.space.Star;
 
 public class   GameEngine {
 
@@ -159,10 +160,10 @@ public class   GameEngine {
     private void checkCollisions() {
         int numObjects = gameObjects.size();
         for (int i = 0; i < numObjects; i++) {
-            if (gameObjects.get(i) instanceof ScreenGameObject) {
+            if (gameObjects.get(i) instanceof ScreenGameObject  && !(gameObjects.get(i) instanceof Star)) {
                 ScreenGameObject objectA = (ScreenGameObject) gameObjects.get(i);
                 for (int j = i + 1; j < numObjects; j++) {
-                    if (gameObjects.get(j) instanceof ScreenGameObject) {
+                    if (gameObjects.get(j) instanceof ScreenGameObject && !(gameObjects.get(j) instanceof Star)) {
                         ScreenGameObject objectB = (ScreenGameObject) gameObjects.get(j);
                         if (objectA.checkCollision(objectB)) {
                             objectA.onCollision(this, objectB);
