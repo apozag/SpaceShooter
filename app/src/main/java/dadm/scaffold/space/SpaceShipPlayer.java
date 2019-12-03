@@ -24,9 +24,12 @@ public class  SpaceShipPlayer extends Sprite {
 
     private int lifes;
 
+    private int points;
 
-    public SpaceShipPlayer(GameEngine gameEngine){
-        super(gameEngine, R.drawable.spaceship);
+
+    public SpaceShipPlayer(GameEngine gameEngine, int shipId){
+
+        super(gameEngine, shipId);
         speedFactor = pixelFactor * 100d / 1000d; // We want to move at 100px per second on a 400px tall screen
         maxX = gameEngine.width/2 - width;
         maxY = gameEngine.height - height;
@@ -132,6 +135,13 @@ public class  SpaceShipPlayer extends Sprite {
         } else if (otherObject instanceof Enemy) {
             //gameEngine.stopGame();
             Enemy e = (Enemy) otherObject;
+            e.removeObject(gameEngine);
+            lifes--;
+        }
+        else if (otherObject instanceof EnemyBullet) {
+            //gameEngine.stopGame();
+            EnemyBullet e = (EnemyBullet) otherObject;
+            e.removeObject(gameEngine);
             lifes--;
         }
         if(lifes < 0){
@@ -151,5 +161,15 @@ public class  SpaceShipPlayer extends Sprite {
 
     public int getLifes(){
         return lifes;
+    }
+
+    public int getPoints(){
+        return points;
+    }
+    public void addPoints(int amount, GameEngine gameEngine){
+        points += amount;
+        if(points > 500){
+            gameEngine.fragment.gameOver();
+        }
     }
 }

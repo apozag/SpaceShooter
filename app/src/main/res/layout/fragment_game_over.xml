@@ -6,13 +6,6 @@
     tools:context=".counter.GameOverFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_gravity="center_horizontal|top"
-        style="@android:style/TextAppearance.DeviceDefault.Large"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
     <TextView
         android:layout_gravity="center_horizontal|top"

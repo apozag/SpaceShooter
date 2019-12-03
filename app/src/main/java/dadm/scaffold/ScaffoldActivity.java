@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import dadm.scaffold.counter.CustomizationFragment;
 import dadm.scaffold.counter.GameFragment;
 import dadm.scaffold.counter.GameOverFragment;
 import dadm.scaffold.counter.MainMenuFragment;
@@ -33,6 +34,10 @@ public class ScaffoldActivity extends AppCompatActivity {
         navigateToFragment( new GameOverFragment());
     }
 
+    public void goToCustomization()
+    {
+        navigateToFragment( new CustomizationFragment());
+    }
     public void goToMenu(){
         navigateToFragment( new MainMenuFragment());
     }

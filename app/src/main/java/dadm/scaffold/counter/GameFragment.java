@@ -2,6 +2,7 @@ package dadm.scaffold.counter;
 
 import android.content.DialogInterface;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +17,13 @@ import dadm.scaffold.engine.FramesPerSecondCounter;
 import dadm.scaffold.engine.GameEngine;
 import dadm.scaffold.engine.GameView;
 import dadm.scaffold.engine.LifesCounter;
+import dadm.scaffold.engine.PointsCounter;
 import dadm.scaffold.input.JoystickInputController;
 import dadm.scaffold.space.GameController;
 import dadm.scaffold.space.SpaceShipPlayer;
+
+import android.content.SharedPreferences;
+
 
 
 public class GameFragment extends BaseFragment implements View.OnClickListener {
@@ -27,12 +32,19 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
 
     private GameFragment instance = this;
 
+    SharedPreferences settings;
+    SharedPreferences.Editor editor;
+
     public GameFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        settings = getContext().getSharedPreferences("MyPrefsFile", 0);
+        editor = settings.edit();
+
         View rootView = inflater.inflate(R.layout.fragment_game, container, false);
         return rootView;
     }
@@ -51,11 +63,31 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
                 GameView gameView = (GameView) getView().findViewById(R.id.gameView);
                 theGameEngine = new GameEngine(getActivity(), gameView, instance );
                 theGameEngine.setTheInputController(new JoystickInputController(getView()));
-                spaceShipPlayer = new SpaceShipPlayer(theGameEngine);
+
+                int id;
+                switch(settings.getInt("SHIPID", 1)){
+                    case 1:
+                        id = R.drawable.spaceship_1;
+                        break;
+                    case 2:
+                        id =  R.drawable.spaceship_2;
+                        break;
+                    case 3:
+                        id =  R.drawable.spaceship_3;
+                        break;
+                    case 4:
+                        id =  R.drawable.spaceship_4;
+                        break;
+                    default:
+                        id = R.drawable.spaceship_1;
+                }
+
+                spaceShipPlayer = new SpaceShipPlayer(theGameEngine, id);
                 theGameEngine.addGameObject(spaceShipPlayer);
                 theGameEngine.setSpaceShipPlayer(spaceShipPlayer);
                 theGameEngine.addGameObject(new FramesPerSecondCounter(theGameEngine));
                 theGameEngine.addGameObject(new LifesCounter(theGameEngine, spaceShipPlayer));
+                theGameEngine.addGameObject(new PointsCounter(theGameEngine, spaceShipPlayer));
                 theGameEngine.addGameObject(new GameController(theGameEngine));
                 theGameEngine.startGame();
             }
@@ -95,6 +127,8 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
     }
 
     public void gameOver(){
+        editor.putInt("POINTS", spaceShipPlayer.getPoints());
+        editor.commit();
         ((ScaffoldActivity)getActivity()).gameOver();
     }
 

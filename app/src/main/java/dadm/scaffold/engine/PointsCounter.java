@@ -6,7 +6,8 @@ import android.graphics.Paint;
 
 import dadm.scaffold.space.SpaceShipPlayer;
 
-public class LifesCounter extends GameObject{
+public class PointsCounter extends GameObject {
+
     private final float textWidth;
     private final float textHeight;
 
@@ -15,9 +16,9 @@ public class LifesCounter extends GameObject{
     private int draws;
     private SpaceShipPlayer player;
 
-    private String framesPerSecondText = "";
+    private String pointsCounter = "";
 
-    public LifesCounter(GameEngine gameEngine, SpaceShipPlayer player) {
+    public PointsCounter(GameEngine gameEngine, SpaceShipPlayer player){
         paint = new Paint();
         paint.setTextAlign(Paint.Align.CENTER);
         textHeight = (float) (50 * gameEngine.pixelFactor);
@@ -25,10 +26,9 @@ public class LifesCounter extends GameObject{
         paint.setTextSize(textHeight / 2);
         this.player = player;
     }
-
     @Override
     public void startGame() {
-        totalMillis = 0;
+
     }
 
     @Override
@@ -36,11 +36,10 @@ public class LifesCounter extends GameObject{
 
     }
 
-
     @Override
     public void onDraw(Canvas canvas) {
         paint.setColor(Color.BLACK);
-        canvas.drawText("Lifes: " + player.getLifes(), textWidth / 2, (int) (canvas.getHeight() / 2), paint);
+        canvas.drawText("points: " + player.getPoints(), textWidth / 2, (int) (canvas.getHeight() / 3), paint);
         draws++;
     }
 }

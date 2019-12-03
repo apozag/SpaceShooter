@@ -15,6 +15,9 @@ public class Enemy extends Sprite {
     private double TargetX;
     private double TargetY;
 
+    private double shootTime = 1000.0;
+    private double time = 0.0;
+
 
     public Enemy(GameController gameController, GameEngine gameEngine) {
         super(gameEngine, R.drawable.alien);
@@ -42,6 +45,7 @@ public class Enemy extends Sprite {
     @Override
     public void onCollision(GameEngine gameEngine, ScreenGameObject otherObject) {
         removeObject(gameEngine);
+        gameEngine.getSpaceShipPlayer().addPoints(10, gameEngine);
     }
 
     @Override
@@ -64,6 +68,15 @@ public class Enemy extends Sprite {
 
         positionX += speedX * elapsedMillis;
         positionY += speedY * elapsedMillis;
+
+        if(time >= shootTime){
+            time = 0.0;
+            EnemyBullet bullet = new EnemyBullet(gameEngine);
+            bullet.init(this, positionX, positionY, 0);
+            gameEngine.addGameObject(bullet);
+        }
+
+        time += elapsedMillis;
 
         // Check if the sprite goes out of the screen and return it to the pool if so
         if (positionX < 0) {
